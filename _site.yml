@@ -1,7 +1,7 @@
 name: "edld-652-blog"
-title: "My Blog"
+title: "Michelle Cui's Data Visualization"
 description: |
-  My Blog
+  Here is a few plots that showing the production of honey in the US from 1998-2012
 output_dir: "docs"
 navbar:
   right:
