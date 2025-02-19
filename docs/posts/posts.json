@@ -1,19 +1,19 @@
 [
   {
     "path": "posts/welcome/",
-    "title": "Welcome to My Blog",
+    "title": "Welcome to Michelle Cui's Blog",
     "description": "Welcome to our new blog, My Blog. We hope you enjoy \nreading what we have to say!",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Michelle Cui",
+        "url": {}
       }
     ],
     "date": "2025-02-19",
     "categories": [],
     "contents": "\n\n\n\n",
     "preview": {},
-    "last_modified": "2025-02-19T15:25:48-08:00",
-    "input_file": {}
+    "last_modified": "2025-02-19T15:29:29-08:00",
+    "input_file": "welcome.knit.md"
   }
 ]
