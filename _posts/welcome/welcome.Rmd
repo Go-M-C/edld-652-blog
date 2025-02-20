@@ -1,8 +1,6 @@
 ---
 title: "Aloha!"
 description: |
-  Welcome to my new blog. I hope you enjoy 
-  reading what I generate!
 author:
   - name: Michelle Cui
 date: 02-19-2025
@@ -11,12 +9,52 @@ output:
     self_contained: false
 ---
 
+Welcome to my new blog. I hope you enjoy reading what I generate!
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE)
 
-# Learn more about creating blogs with Distill at:
-# https://rstudio.github.io/distill/blog.html
+```
 
+```{r include=FALSE}
+library(tidyverse)
+library(here)
+library(scales)
+library(ggforce)
+library(ggrepel)
+library(gghighlight)
+library(ggplot2)
+library(dplyr)
+library(forcats)
+library(maps)
+library(scales)
+library(colorblindr)
+library(patchwork)
+library(plotly) # adds some interactivity to the plot
+theme_set(theme_minimal(base_family = "Times"))
+```
+
+```{r include=FALSE}
+honey <- read.csv(here("data","honeyproduction.csv"))
+```
+
+```{r}
+honey_98_12 <- honey %>% 
+  filter(year == 1998 | year == 2012) %>% 
+  select(state, year, stocks) %>% 
+  mutate(state = fct_reorder(state, stocks))
+
+p1 <- ggplot(honey_98_12, aes(x = state, y = stocks, fill = year)) +
+  geom_col(position = "dodge") +
+  labs(title = "Honey Stocks by State in 1998 vs 2012",
+       x = "State",
+       y = "Honey Stocks",
+       fill = "Year") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5))+
+  scale_y_continuous(labels = label_comma())
+
+p1
 ```
 
 

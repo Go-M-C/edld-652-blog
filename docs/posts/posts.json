@@ -1,44 +1,21 @@
 [
   {
-    "path": "posts/2025-02-19-first-post/",
-    "title": "First-post",
-    "description": "A short description of the post.",
+    "path": "posts/welcome/",
+    "title": "Aloha!",
+    "description": {},
     "author": [
       {
         "name": "Michelle Cui",
         "url": {}
-      },
-      {
-        "name": "",
-        "url": {
-          "https://go-m-c.github.io/edld-652-blog/": {}
-        }
       }
     ],
     "date": "2025-02-19",
     "categories": [],
-    "contents": "\nCheck this amazing plot I made with ggplot.\n\n\n\n\n\n\n",
-    "preview": "posts/2025-02-19-first-post/first-post_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2025-02-19T16:25:58-08:00",
+    "contents": "\nWelcome to my new blog. I hope you enjoy reading what I generate!\n\n\n\n\n\n\n",
+    "preview": "posts/welcome/welcome_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2025-02-19T20:18:52-08:00",
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
-  },
-  {
-    "path": "posts/welcome/",
-    "title": "Aloha!",
-    "description": "Welcome to my new blog. I hope you enjoy \nreading what I generate!",
-    "author": [
-      {
-        "name": "Michelle Cui",
-        "url": {}
-      }
-    ],
-    "date": "2025-02-19",
-    "categories": [],
-    "contents": "\n\n\n\n",
-    "preview": {},
-    "last_modified": "2025-02-19T16:23:53-08:00",
-    "input_file": {}
   }
 ]
