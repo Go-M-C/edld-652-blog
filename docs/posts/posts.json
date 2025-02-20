@@ -10,10 +10,12 @@
       }
     ],
     "date": "2025-02-19",
-    "categories": [],
-    "contents": "\n\n\n\n\n```{.r .distill-force-highlighting-css}\n\n\n",
+    "categories": [
+      "Education Techonology"
+    ],
+    "contents": "\n\n\n\n\n\n\n",
     "preview": "posts/2025-02-19-michelles-final-project/michelles-final-project_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2025-02-19T20:28:14-08:00",
+    "last_modified": "2025-02-20T13:40:57-08:00",
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
@@ -29,10 +31,12 @@
       }
     ],
     "date": "2025-02-19",
-    "categories": [],
+    "categories": [
+      "Education Techonology"
+    ],
     "contents": "\nWelcome to my new blog. I hope you enjoy reading what I generate!\n\n\n\n\n\n\n",
     "preview": "posts/welcome/welcome_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2025-02-19T20:18:52-08:00",
+    "last_modified": "2025-02-20T13:41:52-08:00",
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768

@@ -1,6 +1,8 @@
 ---
 title: "Aloha!"
 description: |
+categories:
+  - Education Techonology
 author:
   - name: Michelle Cui
 date: 02-19-2025

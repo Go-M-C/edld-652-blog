@@ -2,6 +2,8 @@
 title: "Michelle's Final Project"
 description: |
   A short description of the post.
+categories:
+  - Education Techonology
 author:
   - name: Michelle Cui
     url: {}
@@ -61,6 +63,5 @@ p2 <- ggplot(map_data_merged, aes(x = long, y = lat, group = group, fill = prodv
        fill = "Production Value ($)")
 
 p2
-```
 ```
 
