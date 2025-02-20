@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```
 
-```{r include=FALSE}
+```{r message = FALSE, warning = FALSE, include=FALSE}
 library(tidyverse)
 library(here)
 library(scales)
@@ -37,11 +37,11 @@ library(plotly) # adds some interactivity to the plot
 theme_set(theme_minimal(base_family = "Times"))
 ```
 
-```{r include=FALSE}
+```{r include=FALSE, message=FALSE}
 honey <- read.csv(here("data","honeyproduction.csv"))
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 honey_2012 <- honey %>% 
   filter(year == 2012)
 
