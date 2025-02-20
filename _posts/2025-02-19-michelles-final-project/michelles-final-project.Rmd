@@ -1,0 +1,66 @@
+---
+title: "Michelle's Final Project"
+description: |
+  A short description of the post.
+author:
+  - name: Michelle Cui
+    url: {}
+date: 2025-02-19
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE)
+
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(here)
+library(scales)
+library(ggforce)
+library(ggrepel)
+library(gghighlight)
+library(ggplot2)
+library(dplyr)
+library(forcats)
+library(maps)
+library(scales)
+library(colorblindr)
+library(patchwork)
+library(plotly) # adds some interactivity to the plot
+theme_set(theme_minimal(base_family = "Times"))
+```
+
+```{r include=FALSE}
+honey <- read.csv(here("data","honeyproduction.csv"))
+```
+
+```{r}
+honey_2012 <- honey %>% 
+  filter(year == 2012)
+
+honey_2012 <- honey_2012 %>% 
+  mutate(state = tolower(state.name[match(state, state.abb)]))
+
+us_states <- map_data("state")
+
+map_data_merged <- us_states %>% 
+  left_join(honey_2012, by = c("region" = "state"))
+
+p2 <- ggplot(map_data_merged, aes(x = long, y = lat, group = group, fill = prodvalue)) +
+  geom_polygon(color = "white") +
+  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
+  scale_fill_continuous(name = "Production Value", labels = label_dollar()) +
+  labs(title = "Honey Production Value by State(2012)",
+       x = "Longitude",
+       y = "Latitude",
+       fill = "Production Value ($)")
+
+p2
+```
+```
+

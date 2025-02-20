@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/2025-02-19-michelles-final-project/",
+    "title": "Michelle's Final Project",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Michelle Cui",
+        "url": {}
+      }
+    ],
+    "date": "2025-02-19",
+    "categories": [],
+    "contents": "\n\n\n\n\n```{.r .distill-force-highlighting-css}\n\n\n",
+    "preview": "posts/2025-02-19-michelles-final-project/michelles-final-project_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2025-02-19T20:28:14-08:00",
+    "input_file": {},
+    "preview_width": 1248,
+    "preview_height": 768
+  },
+  {
     "path": "posts/welcome/",
     "title": "Aloha!",
     "description": {},
