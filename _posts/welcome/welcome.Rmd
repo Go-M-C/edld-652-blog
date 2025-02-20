@@ -1,8 +1,8 @@
 ---
-title: "Welcome to Michelle Cui's Blog"
+title: "Aloha!"
 description: |
-  Welcome to our new blog, My Blog. We hope you enjoy 
-  reading what we have to say!
+  Welcome to my new blog. I hope you enjoy 
+  reading what I generate!
 author:
   - name: Michelle Cui
 date: 02-19-2025

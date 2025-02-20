@@ -1,8 +1,8 @@
 [
   {
     "path": "posts/welcome/",
-    "title": "Welcome to Michelle Cui's Blog",
-    "description": "Welcome to our new blog, My Blog. We hope you enjoy \nreading what we have to say!",
+    "title": "Aloha!",
+    "description": "Welcome to my new blog. I hope you enjoy \nreading what I generate!",
     "author": [
       {
         "name": "Michelle Cui",
@@ -13,7 +13,7 @@
     "categories": [],
     "contents": "\n\n\n\n",
     "preview": {},
-    "last_modified": "2025-02-19T15:29:29-08:00",
+    "last_modified": "2025-02-19T15:57:30-08:00",
     "input_file": "welcome.knit.md"
   },
   {
@@ -27,16 +27,14 @@
       },
       {
         "name": "",
-        "url": {
-          "file:///Users/michellecui/Library/CloudStorage/OneDrive-UniversityOfOregon/2024%20Winter/edld_652_data_viz/edld-652-blog/_posts/2025-02-19-first-post/first-post.html": {}
-        }
+        "url": {}
       }
     ],
     "date": "2025-02-19",
     "categories": [],
     "contents": "\nCheck this amazing plot I made with ggplot.\n\n\n\n\n\n\n",
     "preview": "posts/2025-02-19-first-post/first-post_files/figure-html5/unnamed-chunk-3-1.png",
-    "last_modified": "2025-02-19T15:53:27-08:00",
+    "last_modified": "2025-02-19T16:00:13-08:00",
     "input_file": "first-post.knit.md"
   }
 ]

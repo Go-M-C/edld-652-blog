@@ -4,7 +4,7 @@ description: |
   A short description of the post.
 author:
   - name: Michelle Cui
-  - url: {file:///Users/michellecui/Library/CloudStorage/OneDrive-UniversityOfOregon/2024%20Winter/edld_652_data_viz/edld-652-blog/_posts/2025-02-19-first-post/first-post.html}
+  - url: {}
 date: 2025-02-19
 output:
   distill::distill_article:
