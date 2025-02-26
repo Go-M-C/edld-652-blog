@@ -13,23 +13,21 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo = FALSE,
                       eval = TRUE,
                       message = FALSE,
                       warning = FALSE)
 ```
 
 ```{r message = FALSE, warning = FALSE, include=FALSE}
-library(tidyverse)
 library(here)
-library(scales)
-library(ggforce)
-library(ggrepel)
-library(gghighlight)
-library(ggplot2)
+library(rio)
+library(tidyverse)
+library(janitor)
+library(haven)
 library(dplyr)
-library(forcats)
-library(maps)
+library(gt)
+library(kableExtra)
 library(scales)
 library(colorblindr)
 library(patchwork)
@@ -38,30 +36,55 @@ theme_set(theme_minimal(base_family = "Times"))
 ```
 
 ```{r include=FALSE, message=FALSE}
-honey <- read.csv(here("data","honeyproduction.csv"))
+load(here("data","MERGEDTP.Rdata"))
+mergedtp <- MERGEDTP
 ```
 
-```{r message=FALSE, warning=FALSE}
-honey_2012 <- honey %>% 
-  filter(year == 2012)
+#### Research question one
 
-honey_2012 <- honey_2012 %>% 
-  mutate(state = tolower(state.name[match(state, state.abb)]))
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rq1 <- mergedtp %>% 
+  clean_names() %>% 
+  select(idteach,cntry,year,partt,it2g14a,it2g05a, it2g05b, ii2g11f)
 
-us_states <- map_data("state")
+sum(is.na(rq1))
+colSums(is.na(rq1))
 
-map_data_merged <- us_states %>% 
-  left_join(honey_2012, by = c("region" = "state"))
+rq1_clean <- rq1 %>% 
+  filter(!is.na(idteach) &!is.na(partt))
 
-p2 <- ggplot(map_data_merged, aes(x = long, y = lat, group = group, fill = prodvalue)) +
-  geom_polygon(color = "white") +
-  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
-  scale_fill_continuous(name = "Production Value", labels = label_dollar()) +
-  labs(title = "Honey Production Value by State(2012)",
-       x = "Longitude",
-       y = "Latitude",
-       fill = "Production Value ($)")
+```
 
-p2
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rq1_missing <- rq1_clean %>% 
+  select(-c(1:4)) %>% 
+  summarise(across(everything(), ~sum(is.na(.)))) %>% 
+  rename(`School Consider ICT a Priority`=it2g14a,
+         `ICT Use During Lesson` = it2g05a,
+         `ICT Prepare Before Lesson` = it2g05b,
+         `ICT Self-support` = ii2g11f) %>% 
+  pivot_longer(everything(), 
+               names_to = "Variable", 
+               values_to = "Missing_Values")
+
+rq1_missing %>% 
+  gt() %>% 
+  tab_header(
+    title = "Table 1. Missing values in key ICT related variables",
+    subtitle = "Insights into digital infrastructure and support disparities"
+  )
+
+rq1_table01 <- rq1_missing %>% 
+  gt() %>% 
+  tab_header(
+    title = "Table 1. Missing values in key ICT related variables",
+    subtitle = "Insights into digital infrastructure and support disparities"
+  )
+```
+
+The final version of Table 1
+
+```{r}
+rq1_table01
 ```
 
