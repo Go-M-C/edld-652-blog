@@ -11,7 +11,7 @@ output:
     self_contained: false
 ---
 
-Welcome to my new blog. I hope you enjoy reading what I generate!
+Welcome to my new blog. Here is a place that I learn education technology. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -38,25 +38,11 @@ theme_set(theme_minimal(base_family = "Times"))
 ```
 
 ```{r include=FALSE}
-honey <- read.csv(here("data","honeyproduction.csv"))
+
 ```
 
 ```{r}
-honey_98_12 <- honey %>% 
-  filter(year == 1998 | year == 2012) %>% 
-  select(state, year, stocks) %>% 
-  mutate(state = fct_reorder(state, stocks))
 
-p1 <- ggplot(honey_98_12, aes(x = state, y = stocks, fill = year)) +
-  geom_col(position = "dodge") +
-  labs(title = "Honey Stocks by State in 1998 vs 2012",
-       x = "State",
-       y = "Honey Stocks",
-       fill = "Year") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 5))+
-  scale_y_continuous(labels = label_comma())
-
-p1
 ```
 
 
