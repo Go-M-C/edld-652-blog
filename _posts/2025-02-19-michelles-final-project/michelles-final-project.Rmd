@@ -88,3 +88,54 @@ The final version of Table 1
 rq1_table01
 ```
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rq1_clean$it2g14a <- factor(rq1_clean$it2g14a,
+                            levels = c(1,2,3,4),
+                            labels = c("Strongly agree",
+                                       "Agree",
+                                       "Disagree",
+                                       "Strongly disagree"))
+
+rq1_clean$it2g05a <- factor(rq1_clean$it2g05a,
+                            levels = c(1,2,3,4),
+                            labels = c("Never", "Less than two years", "Between two and five years", "More than five years"))
+
+rq1_clean$it2g05b <- factor(rq1_clean$it2g05b,
+                            levels = c(1,2,3,4),
+                            labels = c("Never", "Less than two years", "Between two and five years", "More than five years"))
+
+rq1_clean %>% 
+  select(-c(1)) %>% 
+  group_by(it2g14a) %>% 
+  summarise(Mean_ICT_Lesson = mean(it2g05a, na.rm = TRUE),
+            Mean_ICT_Prep = mean(it2g05b, na.rm = TRUE),
+            Count = n())
+
+table(rq1_clean$it2g14a)
+```
+
+QR1: Visualization
+
+```{r}
+rq1_clean <- filter(rq1_clean, !is.na(it2g14a)&!is.na(it2g05a))
+
+p1 <- ggplot(data = rq1_clean, aes(x = it2g05a, fill= it2g14a)) +
+  geom_bar(position = "dodge")+
+  facet_wrap(~cntry)+
+  labs(title = "Figure 1. Frequency of ICT Use during lessons by School ICT Priority across countries",
+       x = "ICT Use During Lessons",
+       y = "Count",
+       fill = "School ICT Priority")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_fill_OkabeIto()
+
+p1
+```
+
+Lab7 Tasks
+
+- Set up git/github repo
+- clean data for Research Question One
+- Use distill to deploy a website
+- Published one table and one plot
+
