@@ -55,8 +55,10 @@ rq1_clean <- rq1 %>%
 
 ```
 
+First try on displaying missing values:
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-rq1_missing <- rq1_clean %>% 
+rq1_missing_1 <- rq1_clean %>% 
   select(-c(1:4)) %>% 
   summarise(across(everything(), ~sum(is.na(.)))) %>% 
   rename(`School Consider ICT a Priority`=it2g14a,
@@ -67,14 +69,14 @@ rq1_missing <- rq1_clean %>%
                names_to = "Variable", 
                values_to = "Missing_Values")
 
-rq1_missing %>% 
+rq1_missing_1 %>% 
   gt() %>% 
   tab_header(
     title = "Table 1. Missing values in key ICT related variables",
     subtitle = "Insights into digital infrastructure and support disparities"
   )
 
-rq1_table01 <- rq1_missing %>% 
+rq1_table01_v1 <- rq1_missing_1 %>% 
   gt() %>% 
   tab_header(
     title = "Table 1. Missing values in key ICT related variables",
@@ -82,11 +84,48 @@ rq1_table01 <- rq1_missing %>%
   )
 ```
 
-The final version of Table 1
+The first version of Table 1 is showing below. One issue of this table is it doesn't separate missing values of 2018 and 2020 response. 
 
 ```{r}
-rq1_table01
+rq1_table01_v1
 ```
+
+I adjusted it from including Year in the subset data
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rq1_missing_2 <- rq1_clean %>% 
+  select(-c(1:2,4)) %>% 
+  group_by(year) %>% 
+  summarise(across(everything(), ~sum(is.na(.))), .groups = "drop") %>% 
+  rename(`School Consider ICT a Priority`=it2g14a,
+         `ICT Use During Lesson` = it2g05a,
+         `ICT Prepare Before Lesson` = it2g05b,
+         `ICT Self-support` = ii2g11f) %>% 
+  pivot_longer(-year, 
+               names_to = "Variable", 
+               values_to = "Missing_Values")
+
+rq1_missing_wide <- rq1_missing_2 %>% 
+  pivot_wider(names_from = year, values_from = Missing_Values)
+
+rq1_table01_v2 <- rq1_missing_wide %>% 
+  gt() %>% 
+  tab_spanner(
+    label = "Missing Values by Year",
+    columns = everything()
+  ) %>% 
+  tab_header(
+    title = "Table 1. Missing values in key ICT related variables",
+    subtitle = "Insights into digital infrastructure and support disparities"
+  )
+```
+
+The second version of Table 1 is showing below.
+
+```{r}
+rq1_table01_v2
+```
+
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 rq1_clean$it2g14a <- factor(rq1_clean$it2g14a,
@@ -131,11 +170,4 @@ p1 <- ggplot(data = rq1_clean, aes(x = it2g05a, fill= it2g14a)) +
 
 p1
 ```
-
-Lab7 Tasks
-
-- Set up git/github repo
-- clean data for Research Question One
-- Use distill to deploy a website
-- Published one table and one plot
 

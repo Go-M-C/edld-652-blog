@@ -13,9 +13,9 @@
     "categories": [
       "Education Techonology"
     ],
-    "contents": "\nResearch question one\nThe final version of Table 1\n\n\nTable 1. Missing values in key ICT related variables\n    Insights into digital infrastructure and support disparities\n    Variable\n      Missing_Values\n    School Consider ICT a Priority\n339ICT Use During Lesson\n95ICT Prepare Before Lesson\n236ICT Self-support\n1292\n\nQR1: Visualization\n\n\n\nLab7 Tasks\nSet up git/github repo\nclean data for Research Question One\nUse distill to deploy a website\nPublished one table and one plot\n\n\n\n",
-    "preview": "posts/2025-02-19-michelles-final-project/michelles-final-project_files/figure-html5/unnamed-chunk-7-1.png",
-    "last_modified": "2025-02-26T16:06:28-08:00",
+    "contents": "\nResearch question one\nFirst try on displaying missing values:\nThe first version of Table 1 is showing below. One issue of this table is it doesn’t separate missing values of 2018 and 2020 response.\n\n\nTable 1. Missing values in key ICT related variables\n    Insights into digital infrastructure and support disparities\n    Variable\n      Missing_Values\n    School Consider ICT a Priority\n339ICT Use During Lesson\n95ICT Prepare Before Lesson\n236ICT Self-support\n1292\n\nI adjusted it from including Year in the subset data\nThe second version of Table 1 is showing below.\n\n\nTable 1. Missing values in key ICT related variables\n    Insights into digital infrastructure and support disparities\n    \n        Missing Values by Year\n      \n    Variable\n      2018\n      2020\n    School Consider ICT a Priority\n142\n197ICT Use During Lesson\n51\n44ICT Prepare Before Lesson\n136\n100ICT Self-support\n464\n828\n\nQR1: Visualization\n\n\n\n\n\n\n",
+    "preview": "posts/2025-02-19-michelles-final-project/michelles-final-project_files/figure-html5/unnamed-chunk-9-1.png",
+    "last_modified": "2025-03-02T15:04:44-08:00",
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
