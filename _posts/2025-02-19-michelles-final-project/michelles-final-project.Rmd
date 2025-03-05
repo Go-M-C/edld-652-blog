@@ -44,6 +44,8 @@ mergedtp <- MERGEDTP
 
 #### Research question one
 
+What is the relationship between teacher’s perspectives on the school’s attitude toward using ICT in teaching and technology use in the classroom?
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 rq1 <- mergedtp %>% 
   clean_names() %>% 
@@ -56,8 +58,6 @@ rq1_clean <- rq1 %>%
   filter(!is.na(idteach) &!is.na(partt))
 
 ```
-
-Summarize data for research question 1
 
 ```{r}
 # Summary statistics
@@ -97,7 +97,7 @@ rq1_clean <- rq1_clean %>%
 
 ```
 
-A descriptive table for table 1
+##### A descriptive table for the Research Question one.
 
 ```{r}
 datasummary_skim(rq1_clean,
@@ -106,9 +106,7 @@ datasummary_skim(rq1_clean,
                  notes = "Source: International Computer and Information Literacy Study(ICILS)")
 ```
 
-Missing Values:
-
-Missing value
+A Table for Missing Values in Research Question one:
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 rq1_missing <- rq1_clean %>% 
@@ -138,8 +136,8 @@ rq1_table_missing <- rq1_missing %>%
 rq1_table_missing
 ```
 
-QR1: Visualization
-Initial version:
+##### Research Question One\
+Initial Visualization version:
 
 ```{r}
 rq1_clean_vis <- rq1_clean %>% 
@@ -159,8 +157,10 @@ p1 <- ggplot(data = rq1_clean_vis, aes(x = `ICT Use During Lesson`, fill= `Schoo
 p1
 ```
 
-RQ1: Visualization second version
-Combining the two plots could provide a more comprehensive view of how ICT use evolved across different contexts before and during lessons, while also showing school ICT priority changes from 2018 to 2020.
+##### Research Question One\
+Final Visualization version:\
+
+What I did is to combining the two plots could provide a more comprehensive view of how ICT use evolved across different contexts before and during lessons, while also showing school ICT priority changes from 2018 to 2020.
 By this point, I realize my data for Research Question one is not tidy enough.
 
 ```{r}
