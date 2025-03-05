@@ -215,6 +215,4 @@ summary(ancova_fit1)
 ancova_fit2 <- aov(`ICT Prepare Before Lesson` ~ `School Consider ICT a Priority` + `Year of Response` + `Country ID` + `ICT Self-support`, data = rq1_analysis)
 summary(ancova_fit2)
 
-
-
 ```
