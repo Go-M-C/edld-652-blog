@@ -22,7 +22,7 @@
   },
   {
     "path": "posts/welcome/",
-    "title": "Aloha!",
+    "title": "Welcome!",
     "description": {},
     "author": [
       {
@@ -36,7 +36,7 @@
     ],
     "contents": "\nThis is a blog where I am building up my work for EDLD 652 Data Visualization Final Project. The dataset I am looking at is the International Computer and Information Literacy Study (ICILS) Teacher Panel 2020. The dataset was retrieved from the International Association for the Evaluation of Educational Achievement (IEA) that is the host orgranization of ICILS. Here is more information about the study and report:\nData, ICILS, Report: Changes in Digital Learning During a Pandemic—Findings From the ICILS\n\n\n\n",
     "preview": {},
-    "last_modified": "2025-03-06T14:01:17-08:00",
+    "last_modified": "2025-03-06T14:09:59-08:00",
     "input_file": {}
   }
 ]
