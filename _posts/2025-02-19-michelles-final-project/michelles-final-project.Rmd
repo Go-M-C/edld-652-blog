@@ -193,6 +193,12 @@ p2 <- rq1_clean_vis_long %>%
 p2
 ```
 
+```{r}
+
+```
+
+
+
 My null hypothesis for research question one:
 School ICT Priority has no influence on teacher's ICT use before and during lessons.
 
