@@ -1,24 +1,5 @@
 [
   {
-    "path": "posts/welcome/",
-    "title": "Welcome!",
-    "description": {},
-    "author": [
-      {
-        "name": "Michelle Cui",
-        "url": {}
-      }
-    ],
-    "date": "2025-03-18",
-    "categories": [
-      "Education Techonology"
-    ],
-    "contents": "\nThis is a blog where I am building up my work for EDLD 652 Data Visualization Final Project. The dataset I am looking at is the International Computer and Information Literacy Study (ICILS) Teacher Panel 2020. The dataset was retrieved from the International Association for the Evaluation of Educational Achievement (IEA) that is the host orgranization of ICILS. Here is more information about the study and report:\nData, ICILS, Report: Changes in Digital Learning During a Pandemic—Findings From the ICILS\n\n\n\n",
-    "preview": {},
-    "last_modified": "2025-03-06T15:21:19-08:00",
-    "input_file": {}
-  },
-  {
     "path": "posts/2025-02-19-michelles-final-project/",
     "title": "Data Visualization Step One",
     "description": {},
@@ -38,5 +19,24 @@
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome!",
+    "description": {},
+    "author": [
+      {
+        "name": "Michelle Cui",
+        "url": {}
+      }
+    ],
+    "date": "2025-02-19",
+    "categories": [
+      "Education Techonology"
+    ],
+    "contents": "\nThis is a blog where I am building up my work for EDLD 652 Data Visualization Final Project. The dataset I am looking at is the International Computer and Information Literacy Study (ICILS) Teacher Panel 2020. The dataset was retrieved from the International Association for the Evaluation of Educational Achievement (IEA) that is the host orgranization of ICILS. Here is more information about the study and report:\nData, ICILS, Report: Changes in Digital Learning During a Pandemic—Findings From the ICILS\n\n\n\n",
+    "preview": {},
+    "last_modified": "2025-03-06T15:46:41-08:00",
+    "input_file": {}
   }
 ]

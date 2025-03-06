@@ -5,7 +5,8 @@ categories:
   - Education Techonology
 author:
   - name: Michelle Cui
-date: 03-18-2025
+    affilication: University of Oregon
+date: 2025-02-19
 output:
   distill::distill_article:
     self_contained: false
