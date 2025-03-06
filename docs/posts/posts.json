@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2025-03-06-data-visualization-step-two/",
+    "title": "Data Visualization Step Two",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Michelle Cui",
+        "url": {}
+      }
+    ],
+    "date": "2025-03-06",
+    "categories": [],
+    "contents": "\nDistill is a publication format for scientific and technical writing, native to the web.\nLearn more about using Distill at https://rstudio.github.io/distill.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2025-03-06T15:56:09-08:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2025-02-19-michelles-final-project/",
     "title": "Data Visualization Step One",
     "description": {},
