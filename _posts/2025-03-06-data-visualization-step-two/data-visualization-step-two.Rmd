@@ -293,3 +293,25 @@ p_subject_p3 <- p_subject_2 %>%
 p_subject_p3
 ```
 
+```{r}
+p_subject_p4 <- rq2_data %>%
+  pivot_longer(cols = starts_with("it2g03"), names_to = "subject", values_to = "checked") %>% 
+  filter(checked == "Checked") %>% 
+  group_by(subject, it2g06a, year, cntry) %>% 
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(subject = factor(subject, 
+                          levels = c("it2g03a", "it2g03b", "it2g03c", "it2g03d", "it2g03e", "it2g03f", "it2g03g", "it2g03h", "it2g03i"),
+                          labels = c("Language arts test language", "Language arts foreign and other national languages", "Mathematics", "Sciences","Human sciences/Humanities", "Creative arts", "Information technology", "Practical and vocational subjects", "Other"))) %>% 
+  ggplot(aes(x = subject, y = count, fill = factor(year))) +
+  geom_bar(stat = "identity", position = position_dodge(width = 1)) +
+  labs(title = "Relationship Between Teachers’ Technology Use in School and Teaching Subjects",
+       x = "Teaching Subjects",
+       y = "Number of teachers using ICT",
+       fill = "Year")+
+  facet_wrap(~ cntry)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_fill_OkabeIto()
+
+p_subject_p4
+```
+
