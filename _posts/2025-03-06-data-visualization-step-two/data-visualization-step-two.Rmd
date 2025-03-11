@@ -56,7 +56,7 @@ load(here("data","MERGEDTP.Rdata"))
 mergedtp <- MERGEDTP
 ```
 
-```{r}
+```{r layout = "l-page"}
 rq1_data <- mergedtp %>% 
   clean_names() %>% 
   select(idteach, cntry, partt, year, it2g06a, it2g14a) %>% 
@@ -80,20 +80,20 @@ datasummary_skim(rq1_data,
 The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt function to the rest of the table. However, the summary is still too robust.\
 
 
-```{r}
+```{r layout = "l-page"}
 rq1_summary <- rq1_data %>% 
   datasummary_skim(type = "categorical", output = "gt") %>% 
   tab_header(
     title = "Summary of Teachers' ICT Perspectives (2018 & 2020)"
   ) %>% 
-  cols_width(everything() ~ px(200)) %>% 
+  cols_width(everything() ~ px(130)) %>% 
   opt_table_outline()
 rq1_summary
 ```
 
 Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.\
 
-```{r}
+```{r layout = "l-page"}
 rq1_summary <- rq1_data %>% 
   group_by(cntry, year, it2g06a, it2g14a) %>% 
   summarise(
@@ -115,7 +115,14 @@ rq1_summary %>%
     `2020_Percent` = "% (2020)"
   ) %>% 
   fmt_number(columns = c(`2018_Percent`, `2020_Percent`), decimals = 1) %>%
-  tab_options(table.width = px(900)) %>% 
+  tab_options(table.width = px(100),
+              table.font.size = px(12)) %>% 
+  tab_style(
+    style = cell_text(whitespace = "nowrap"),
+    locations = cells_body(columns = c(it2g06a,it2g14a))) %>% 
+  cols_width(
+    it2g06a ~ px(200),
+    everything() ~ px(100)) %>% 
   tab_style(
     style = list(cell_fill(color = "#9EDBDB")),
     location = list(
