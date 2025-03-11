@@ -135,7 +135,7 @@ rq1_summary %>%
 
 Here is how I visualize the categorical data.\
 
-```{r layout = "l-page"}
+```{r}
 rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
   geom_bar(position = "fill") +
   facet_wrap(year ~ cntry) +
