@@ -110,7 +110,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Data Visualization Step Two"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["Education Techonology"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Michelle Cui"]}]}]},{"type":"character","attributes":{},"value":["2025-03-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Data Visualization Step Two"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["Education Techonology"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Michelle Cui"]}]}]},{"type":"character","attributes":{},"value":["2025-03-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["code_folding","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1557,9 +1557,42 @@ partt: Survey participation
 idteach: Teacher ID<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
-
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># read in data</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>,<span class='st'>"MERGEDTP.Rdata"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>mergedtp</span> <span class='op'>&lt;-</span> <span class='va'>MERGEDTP</span></span></code></pre>
+</div>
+</details>
 </div>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_data</span> <span class='op'>&lt;-</span> <span class='va'>mergedtp</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://sfirke.github.io/janitor/reference/clean_names.html'>clean_names</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>idteach</span>, <span class='va'>cntry</span>, <span class='va'>partt</span>, <span class='va'>year</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>partt</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g14a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g14a</span>,</span>
+<span>                           levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,</span>
+<span>                           labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Strongly Agree"</span>, <span class='st'>"Agree"</span>, <span class='st'>"Disagree"</span>, <span class='st'>"Strongly Disagree"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g06a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g06a</span>,</span>
+<span>                           levels <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,</span>
+<span>                           labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Never"</span>, <span class='st'>"Less than once a month"</span>, <span class='st'>"At least once a month but not every week"</span>, <span class='st'>"At least once a week but not every day"</span>, <span class='st'>"Every day"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://modelsummary.com/man/datasummary_skim.html'>datasummary_skim</a></span><span class='op'>(</span><span class='va'>rq1_data</span>, </span>
+<span>                 type <span class='op'>=</span> <span class='st'>"categorical"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
 <table style="width:93%;">
 <colgroup>
 <col style="width: 13%" />
@@ -1654,23 +1687,38 @@ idteach: Teacher ID<br />
 <p>The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = “gt” to apply the gt function to the rest of the table. However, the summary is still too robust.<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="pmwfhkqkhx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pmwfhkqkhx table {
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_summary</span> <span class='op'>&lt;-</span> <span class='va'>rq1_data</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://modelsummary.com/man/datasummary_skim.html'>datasummary_skim</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"categorical"</span>, output <span class='op'>=</span> <span class='st'>"gt"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_header.html'>tab_header</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Summary of Teachers' ICT Perspectives (2018 &amp; 2020)"</span></span>
+<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/cols_width.html'>cols_width</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://gt.rstudio.com/reference/px.html'>px</a></span><span class='op'>(</span><span class='fl'>200</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/opt_table_outline.html'>opt_table_outline</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>rq1_summary</span></span></code></pre>
+</div>
+</details>
+<div id="lfimakntng" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lfimakntng table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pmwfhkqkhx thead, #pmwfhkqkhx tbody, #pmwfhkqkhx tfoot, #pmwfhkqkhx tr, #pmwfhkqkhx td, #pmwfhkqkhx th {
+#lfimakntng thead, #lfimakntng tbody, #lfimakntng tfoot, #lfimakntng tr, #lfimakntng td, #lfimakntng th {
   border-style: none;
 }
 
-#pmwfhkqkhx p {
+#lfimakntng p {
   margin: 0;
   padding: 0;
 }
 
-#pmwfhkqkhx .gt_table {
+#lfimakntng .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1696,12 +1744,12 @@ idteach: Teacher ID<br />
   border-left-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_caption {
+#lfimakntng .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pmwfhkqkhx .gt_title {
+#lfimakntng .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1713,7 +1761,7 @@ idteach: Teacher ID<br />
   border-bottom-width: 0;
 }
 
-#pmwfhkqkhx .gt_subtitle {
+#lfimakntng .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1725,7 +1773,7 @@ idteach: Teacher ID<br />
   border-top-width: 0;
 }
 
-#pmwfhkqkhx .gt_heading {
+#lfimakntng .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1737,13 +1785,13 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_bottom_border {
+#lfimakntng .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_col_headings {
+#lfimakntng .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1758,7 +1806,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_col_heading {
+#lfimakntng .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1778,7 +1826,7 @@ idteach: Teacher ID<br />
   overflow-x: hidden;
 }
 
-#pmwfhkqkhx .gt_column_spanner_outer {
+#lfimakntng .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1790,15 +1838,15 @@ idteach: Teacher ID<br />
   padding-right: 4px;
 }
 
-#pmwfhkqkhx .gt_column_spanner_outer:first-child {
+#lfimakntng .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pmwfhkqkhx .gt_column_spanner_outer:last-child {
+#lfimakntng .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pmwfhkqkhx .gt_column_spanner {
+#lfimakntng .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1810,11 +1858,11 @@ idteach: Teacher ID<br />
   width: 100%;
 }
 
-#pmwfhkqkhx .gt_spanner_row {
+#lfimakntng .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pmwfhkqkhx .gt_group_heading {
+#lfimakntng .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1840,7 +1888,7 @@ idteach: Teacher ID<br />
   text-align: left;
 }
 
-#pmwfhkqkhx .gt_empty_group_heading {
+#lfimakntng .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1855,15 +1903,15 @@ idteach: Teacher ID<br />
   vertical-align: middle;
 }
 
-#pmwfhkqkhx .gt_from_md > :first-child {
+#lfimakntng .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pmwfhkqkhx .gt_from_md > :last-child {
+#lfimakntng .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pmwfhkqkhx .gt_row {
+#lfimakntng .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1882,7 +1930,7 @@ idteach: Teacher ID<br />
   overflow-x: hidden;
 }
 
-#pmwfhkqkhx .gt_stub {
+#lfimakntng .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1895,7 +1943,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#pmwfhkqkhx .gt_stub_row_group {
+#lfimakntng .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1909,15 +1957,15 @@ idteach: Teacher ID<br />
   vertical-align: top;
 }
 
-#pmwfhkqkhx .gt_row_group_first td {
+#lfimakntng .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pmwfhkqkhx .gt_row_group_first th {
+#lfimakntng .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pmwfhkqkhx .gt_summary_row {
+#lfimakntng .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1927,16 +1975,16 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#pmwfhkqkhx .gt_first_summary_row {
+#lfimakntng .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_first_summary_row.thick {
+#lfimakntng .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pmwfhkqkhx .gt_last_summary_row {
+#lfimakntng .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1946,7 +1994,7 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_grand_summary_row {
+#lfimakntng .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1956,7 +2004,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#pmwfhkqkhx .gt_first_grand_summary_row {
+#lfimakntng .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,7 +2014,7 @@ idteach: Teacher ID<br />
   border-top-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_last_grand_summary_row_top {
+#lfimakntng .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1976,11 +2024,11 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_striped {
+#lfimakntng .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pmwfhkqkhx .gt_table_body {
+#lfimakntng .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1989,7 +2037,7 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_footnotes {
+#lfimakntng .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2003,7 +2051,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_footnote {
+#lfimakntng .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2012,7 +2060,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#pmwfhkqkhx .gt_sourcenotes {
+#lfimakntng .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2026,7 +2074,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#pmwfhkqkhx .gt_sourcenote {
+#lfimakntng .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2034,72 +2082,72 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#pmwfhkqkhx .gt_left {
+#lfimakntng .gt_left {
   text-align: left;
 }
 
-#pmwfhkqkhx .gt_center {
+#lfimakntng .gt_center {
   text-align: center;
 }
 
-#pmwfhkqkhx .gt_right {
+#lfimakntng .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pmwfhkqkhx .gt_font_normal {
+#lfimakntng .gt_font_normal {
   font-weight: normal;
 }
 
-#pmwfhkqkhx .gt_font_bold {
+#lfimakntng .gt_font_bold {
   font-weight: bold;
 }
 
-#pmwfhkqkhx .gt_font_italic {
+#lfimakntng .gt_font_italic {
   font-style: italic;
 }
 
-#pmwfhkqkhx .gt_super {
+#lfimakntng .gt_super {
   font-size: 65%;
 }
 
-#pmwfhkqkhx .gt_footnote_marks {
+#lfimakntng .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pmwfhkqkhx .gt_asterisk {
+#lfimakntng .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pmwfhkqkhx .gt_indent_1 {
+#lfimakntng .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pmwfhkqkhx .gt_indent_2 {
+#lfimakntng .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pmwfhkqkhx .gt_indent_3 {
+#lfimakntng .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pmwfhkqkhx .gt_indent_4 {
+#lfimakntng .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pmwfhkqkhx .gt_indent_5 {
+#lfimakntng .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pmwfhkqkhx .katex-display {
+#lfimakntng .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pmwfhkqkhx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lfimakntng div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2180,23 +2228,59 @@ idteach: Teacher ID<br />
 <p>Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="uoqpzzaisc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uoqpzzaisc table {
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_summary</span> <span class='op'>&lt;-</span> <span class='va'>rq1_data</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>cntry</span>, <span class='va'>year</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
+<span>    N <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='va'>N</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>year</span>, values_from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>N</span>, <span class='va'>Percent</span><span class='op'>)</span>, names_glue <span class='op'>=</span> <span class='st'>"{year}_{.value}"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>cntry</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_summary</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_header.html'>tab_header</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Teachers' ICT perspectives by country and year (2018 &amp; 2020)"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/cols_label.html'>cols_label</a></span><span class='op'>(</span></span>
+<span>    cntry <span class='op'>=</span> <span class='st'>"Country"</span>,</span>
+<span>    it2g06a <span class='op'>=</span> <span class='st'>"ICT Use Frequency"</span>,</span>
+<span>    it2g14a <span class='op'>=</span> <span class='st'>"School ICT Priority"</span>,</span>
+<span>    `2018_N` <span class='op'>=</span> <span class='st'>"N (2018)"</span>,</span>
+<span>    `2018_Percent` <span class='op'>=</span> <span class='st'>"% (2018)"</span>,</span>
+<span>    `2020_N` <span class='op'>=</span> <span class='st'>"N (2020)"</span>,</span>
+<span>    `2020_Percent` <span class='op'>=</span> <span class='st'>"% (2020)"</span></span>
+<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/fmt_number.html'>fmt_number</a></span><span class='op'>(</span>columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>`2018_Percent`</span>, <span class='va'>`2020_Percent`</span><span class='op'>)</span>, decimals <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_options.html'>tab_options</a></span><span class='op'>(</span>table.width <span class='op'>=</span> <span class='fu'><a href='https://gt.rstudio.com/reference/px.html'>px</a></span><span class='op'>(</span><span class='fl'>900</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_style.html'>tab_style</a></span><span class='op'>(</span></span>
+<span>    style <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://gt.rstudio.com/reference/cell_fill.html'>cell_fill</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#9EDBDB"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span>    location <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span>      <span class='fu'><a href='https://gt.rstudio.com/reference/cells_body.html'>cells_body</a></span><span class='op'>(</span>columns <span class='op'>=</span> <span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, rows <span class='op'>=</span> <span class='va'>it2g06a</span> <span class='op'>==</span> <span class='st'>"Every day"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_footnote.html'>tab_footnote</a></span><span class='op'>(</span></span>
+<span>    footnote <span class='op'>=</span> <span class='st'>"Note: DNK refers to Denmark, FIN refers to Finland, and URY refers to Uruguay."</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
+<div id="awwgievsio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#awwgievsio table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uoqpzzaisc thead, #uoqpzzaisc tbody, #uoqpzzaisc tfoot, #uoqpzzaisc tr, #uoqpzzaisc td, #uoqpzzaisc th {
+#awwgievsio thead, #awwgievsio tbody, #awwgievsio tfoot, #awwgievsio tr, #awwgievsio td, #awwgievsio th {
   border-style: none;
 }
 
-#uoqpzzaisc p {
+#awwgievsio p {
   margin: 0;
   padding: 0;
 }
 
-#uoqpzzaisc .gt_table {
+#awwgievsio .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2222,12 +2306,12 @@ idteach: Teacher ID<br />
   border-left-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_caption {
+#awwgievsio .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uoqpzzaisc .gt_title {
+#awwgievsio .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2239,7 +2323,7 @@ idteach: Teacher ID<br />
   border-bottom-width: 0;
 }
 
-#uoqpzzaisc .gt_subtitle {
+#awwgievsio .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2251,7 +2335,7 @@ idteach: Teacher ID<br />
   border-top-width: 0;
 }
 
-#uoqpzzaisc .gt_heading {
+#awwgievsio .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2263,13 +2347,13 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_bottom_border {
+#awwgievsio .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_col_headings {
+#awwgievsio .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2284,7 +2368,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_col_heading {
+#awwgievsio .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2304,7 +2388,7 @@ idteach: Teacher ID<br />
   overflow-x: hidden;
 }
 
-#uoqpzzaisc .gt_column_spanner_outer {
+#awwgievsio .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2316,15 +2400,15 @@ idteach: Teacher ID<br />
   padding-right: 4px;
 }
 
-#uoqpzzaisc .gt_column_spanner_outer:first-child {
+#awwgievsio .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uoqpzzaisc .gt_column_spanner_outer:last-child {
+#awwgievsio .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uoqpzzaisc .gt_column_spanner {
+#awwgievsio .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2336,11 +2420,11 @@ idteach: Teacher ID<br />
   width: 100%;
 }
 
-#uoqpzzaisc .gt_spanner_row {
+#awwgievsio .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uoqpzzaisc .gt_group_heading {
+#awwgievsio .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2366,7 +2450,7 @@ idteach: Teacher ID<br />
   text-align: left;
 }
 
-#uoqpzzaisc .gt_empty_group_heading {
+#awwgievsio .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2381,15 +2465,15 @@ idteach: Teacher ID<br />
   vertical-align: middle;
 }
 
-#uoqpzzaisc .gt_from_md > :first-child {
+#awwgievsio .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uoqpzzaisc .gt_from_md > :last-child {
+#awwgievsio .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uoqpzzaisc .gt_row {
+#awwgievsio .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2408,7 +2492,7 @@ idteach: Teacher ID<br />
   overflow-x: hidden;
 }
 
-#uoqpzzaisc .gt_stub {
+#awwgievsio .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2421,7 +2505,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#uoqpzzaisc .gt_stub_row_group {
+#awwgievsio .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2435,15 +2519,15 @@ idteach: Teacher ID<br />
   vertical-align: top;
 }
 
-#uoqpzzaisc .gt_row_group_first td {
+#awwgievsio .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uoqpzzaisc .gt_row_group_first th {
+#awwgievsio .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uoqpzzaisc .gt_summary_row {
+#awwgievsio .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2453,16 +2537,16 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#uoqpzzaisc .gt_first_summary_row {
+#awwgievsio .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_first_summary_row.thick {
+#awwgievsio .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uoqpzzaisc .gt_last_summary_row {
+#awwgievsio .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2472,7 +2556,7 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_grand_summary_row {
+#awwgievsio .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2482,7 +2566,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#uoqpzzaisc .gt_first_grand_summary_row {
+#awwgievsio .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2492,7 +2576,7 @@ idteach: Teacher ID<br />
   border-top-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_last_grand_summary_row_top {
+#awwgievsio .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2502,11 +2586,11 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_striped {
+#awwgievsio .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uoqpzzaisc .gt_table_body {
+#awwgievsio .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2515,7 +2599,7 @@ idteach: Teacher ID<br />
   border-bottom-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_footnotes {
+#awwgievsio .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2529,7 +2613,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_footnote {
+#awwgievsio .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2538,7 +2622,7 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#uoqpzzaisc .gt_sourcenotes {
+#awwgievsio .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2552,7 +2636,7 @@ idteach: Teacher ID<br />
   border-right-color: #D3D3D3;
 }
 
-#uoqpzzaisc .gt_sourcenote {
+#awwgievsio .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2560,72 +2644,72 @@ idteach: Teacher ID<br />
   padding-right: 5px;
 }
 
-#uoqpzzaisc .gt_left {
+#awwgievsio .gt_left {
   text-align: left;
 }
 
-#uoqpzzaisc .gt_center {
+#awwgievsio .gt_center {
   text-align: center;
 }
 
-#uoqpzzaisc .gt_right {
+#awwgievsio .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uoqpzzaisc .gt_font_normal {
+#awwgievsio .gt_font_normal {
   font-weight: normal;
 }
 
-#uoqpzzaisc .gt_font_bold {
+#awwgievsio .gt_font_bold {
   font-weight: bold;
 }
 
-#uoqpzzaisc .gt_font_italic {
+#awwgievsio .gt_font_italic {
   font-style: italic;
 }
 
-#uoqpzzaisc .gt_super {
+#awwgievsio .gt_super {
   font-size: 65%;
 }
 
-#uoqpzzaisc .gt_footnote_marks {
+#awwgievsio .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uoqpzzaisc .gt_asterisk {
+#awwgievsio .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uoqpzzaisc .gt_indent_1 {
+#awwgievsio .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uoqpzzaisc .gt_indent_2 {
+#awwgievsio .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uoqpzzaisc .gt_indent_3 {
+#awwgievsio .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uoqpzzaisc .gt_indent_4 {
+#awwgievsio .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uoqpzzaisc .gt_indent_5 {
+#awwgievsio .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uoqpzzaisc .katex-display {
+#awwgievsio .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uoqpzzaisc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#awwgievsio div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2988,14 +3072,86 @@ idteach: Teacher ID<br />
 <p>Here is how I visualize the categorical data.<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>rq1_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>it2g14a</span>, fill <span class='op'>=</span> <span class='va'>it2g06a</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"fill"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>~</span> <span class='va'>cntry</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Teacher ICT Use in Teaching by School ICT Priority"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"School ICT Priority"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Propportion"</span>,</span>
+<span>    fill <span class='op'>=</span> <span class='st'>"Teacher ICT Use Frequency in Teaching"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_p1</span></span></code></pre>
+</div>
+</details>
 <p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
 <p>The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>rq1_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>it2g06a</span>, fill <span class='op'>=</span> <span class='va'>it2g14a</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span>position <span class='op'>=</span> <span class='st'>"dodge"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>~</span> <span class='va'>cntry</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship between Teacher ICT Use and Schools' perspective on ICT"</span>,</span>
+<span>    fill <span class='op'>=</span> <span class='st'>"School ICT Priority"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Propportion"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Teacher ICT Use Frequency in Teaching"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='fl'>45</span>, hjust <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/colorblindr/man/scale_OkabeIto.html'>scale_fill_OkabeIto</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_p2</span></span></code></pre>
+</div>
+</details>
 <p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>year</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>year</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_p3</span> <span class='op'>&lt;-</span> <span class='va'>rq1_data</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>cntry</span>, <span class='va'>it2g06a</span>,<span class='va'>it2g14a</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>count <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>,</span>
+<span>         y <span class='op'>=</span> <span class='va'>count</span>,</span>
+<span>         group <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interaction.html'>interaction</a></span><span class='op'>(</span><span class='va'>cntry</span>,<span class='va'>it2g14a</span><span class='op'>)</span>,</span>
+<span>         color <span class='op'>=</span> <span class='va'>it2g14a</span>,</span>
+<span>         linetype <span class='op'>=</span> <span class='va'>cntry</span>,</span>
+<span>         shape <span class='op'>=</span> <span class='va'>cntry</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>it2g06a</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Figure 1. ICT Use Across Countries (2018 &amp; 2020)"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Year of Response"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
+<span>       color <span class='op'>=</span> <span class='st'>"School ICT Priority"</span>,</span>
+<span>       linetype <span class='op'>=</span> <span class='st'>"Country"</span>,</span>
+<span>       shape <span class='op'>=</span> <span class='st'>"Country"</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/colorblindr/man/scale_OkabeIto.html'>scale_color_OkabeIto</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_shape_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"DNK"</span> <span class='op'>=</span> <span class='fl'>0</span>, <span class='st'>"FIN"</span> <span class='op'>=</span> <span class='fl'>15</span>, <span class='st'>"URY"</span> <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>panel.spacing <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='st'>"lines"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>rq1_p3</span></span></code></pre>
+</div>
+</details>
 <p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
