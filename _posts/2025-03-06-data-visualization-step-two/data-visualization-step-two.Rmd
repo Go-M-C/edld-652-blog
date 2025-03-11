@@ -151,7 +151,7 @@ rq1_p1
 
 The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.\
 
-```{r layout = "l-page"}
+```{r}
 rq1_p2 <- ggplot(rq1_data, aes(x = it2g06a, fill = it2g14a)) +
   geom_bar(position = "dodge") +
   facet_wrap(year ~ cntry) +
@@ -167,7 +167,7 @@ rq1_p2
 ```
 
 
-```{r layout = "l-page"}
+```{r}
 rq1_data$year <- as.factor(rq1_data$year)
 
 rq1_p3 <- rq1_data %>% 
