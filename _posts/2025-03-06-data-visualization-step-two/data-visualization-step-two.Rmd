@@ -76,7 +76,9 @@ datasummary_skim(rq1_data,
 
 ```
 
-The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt function to the rest of the table. However, the summary is still too robust. 
+The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt function to the rest of the table. However, the summary is still too robust.\
+
+
 ```{r}
 rq1_summary <- rq1_data %>% 
   datasummary_skim(type = "categorical", output = "gt") %>% 
@@ -88,7 +90,7 @@ rq1_summary <- rq1_data %>%
 rq1_summary
 ```
 
-Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.
+Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.\
 
 ```{r}
 rq1_summary <- rq1_data %>% 
@@ -123,7 +125,8 @@ rq1_summary %>%
 
 ```
 
-Here is how I visualize the categorical data. 
+Here is how I visualize the categorical data.\
+
 ```{r}
 rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
   geom_bar(position = "fill") +
@@ -139,7 +142,7 @@ rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
 rq1_p1
 ```
 
-The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.
+The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.\
 
 ```{r}
 rq1_p2 <- ggplot(rq1_data, aes(x = it2g06a, fill = it2g14a)) +
