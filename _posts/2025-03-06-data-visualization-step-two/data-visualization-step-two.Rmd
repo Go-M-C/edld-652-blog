@@ -1,10 +1,10 @@
 ---
 title: "Data Visualization Step Two"
 description: |
-  A short description of the post.
+categories:
+  - Education Techonology
 author:
   - name: Michelle Cui
-    url: {}
 date: 2025-03-06
 output:
   distill::distill_article:
@@ -13,8 +13,180 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE,
+                      eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
 ```
+
+### Research Question 1
+What is the relationship between teacher’s perspectives on the school’s attitude toward using ICT technology in the classroom?\
+(This question aims to explore institutional attitude toward information and communication technology (ICT) influence individual teacher behavior in adopting technology in the classroom).\
+
+**Variable selection: **
+it2g06a: ICT use at school when teaching
+IT2G14A: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis
+cntry: Country(Denmark, Finland, and Uruguay)
+partt: Survey participation
+idteach: Teacher ID\
+
+```{r message = FALSE, warning = FALSE, include=FALSE}
+library(here)
+library(rio)
+library(tidyverse)
+library(tidyr)
+library(janitor)
+library(haven)
+library(dplyr)
+library(gt)
+library(colorblindr)
+theme_set(theme_minimal(base_family = "Times"))
+library(kableExtra)
+library(patchwork)
+library(modelsummary)
+library(car)
+library(lme4)
+
+```
+
+```{r}
+# read in data
+load(here("data","MERGEDTP.Rdata"))
+mergedtp <- MERGEDTP
+```
+
+```{r}
+rq1_data <- mergedtp %>% 
+  clean_names() %>% 
+  select(idteach, cntry, partt, year, it2g06a, it2g14a) %>% 
+  filter(partt == 1)
+
+rq1_data <- na.omit(rq1_data)
+
+rq1_data$it2g14a <- factor(rq1_data$it2g14a,
+                           levels = c(1,2,3,4),
+                           labels = c("Strongly Agree", "Agree", "Disagree", "Strongly Disagree"))
+
+rq1_data$it2g06a <- factor(rq1_data$it2g06a,
+                           levels = 1:5,
+                           labels = c("Never", "Less than once a month", "At least once a month but not every week", "At least once a week but not every day", "Every day"))
+
+datasummary_skim(rq1_data, 
+                 type = "categorical")
+
+```
+
+The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt function to the rest of the table. However, the summary is still too robust. 
+```{r}
+rq1_summary <- rq1_data %>% 
+  datasummary_skim(type = "categorical", output = "gt") %>% 
+  tab_header(
+    title = "Summary of Teachers' ICT Perspectives (2018 & 2020)"
+  ) %>% 
+  cols_width(everything() ~ px(200)) %>% 
+  opt_table_outline()
+rq1_summary
+```
+
+Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.
+
+```{r}
+rq1_summary <- rq1_data %>% 
+  group_by(cntry, year, it2g06a, it2g14a) %>% 
+  summarise(
+    N = n(), .groups = "drop") %>% 
+  mutate(Percent = round(100 * N/sum(N), 1)) %>% 
+  pivot_wider(names_from = year, values_from = c(N, Percent), names_glue = "{year}_{.value}") %>% 
+  arrange(cntry, it2g06a, it2g14a)
+
+rq1_summary %>% 
+  gt() %>% 
+  tab_header(title = "Teachers' ICT perspectives by country and year (2018 & 2020)") %>% 
+  cols_label(
+    cntry = "Country",
+    it2g06a = "ICT Use Frequency",
+    it2g14a = "School ICT Priority",
+    `2018_N` = "N (2018)",
+    `2018_Percent` = "% (2018)",
+    `2020_N` = "N (2020)",
+    `2020_Percent` = "% (2020)"
+  ) %>% 
+  fmt_number(columns = c(`2018_Percent`, `2020_Percent`), decimals = 1) %>%
+  tab_options(table.width = px(900)) %>% 
+  tab_style(
+    style = list(cell_fill(color = "#9EDBDB")),
+    location = list(
+      cells_body(columns = everything(), rows = it2g06a == "Every day"))
+  ) %>% 
+  tab_footnote(
+    footnote = "Note: DNK refers to Denmark, FIN refers to Finland, and URY refers to Uruguay.")
+
+```
+
+Here is how I visualize the categorical data. 
+```{r}
+rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
+  geom_bar(position = "fill") +
+  facet_wrap(year ~ cntry) +
+  labs(
+    title = "Teacher ICT Use in Teaching by School ICT Priority",
+    x = "School ICT Priority",
+    y = "Propportion",
+    fill = "Teacher ICT Use Frequency in Teaching"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+rq1_p1
+```
+
+The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.
+
+```{r}
+rq1_p2 <- ggplot(rq1_data, aes(x = it2g06a, fill = it2g14a)) +
+  geom_bar(position = "dodge") +
+  facet_wrap(year ~ cntry) +
+  labs(
+    title = "Relationship between Teacher ICT Use and Schools' perspective on ICT",
+    fill = "School ICT Priority",
+    y = "Propportion",
+    x = "Teacher ICT Use Frequency in Teaching"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_fill_OkabeIto()
+
+rq1_p2
+```
+
+
+```{r}
+rq1_data$year <- as.factor(rq1_data$year)
+
+rq1_p3 <- rq1_data %>% 
+  group_by(year, cntry, it2g06a,it2g14a) %>% 
+  summarise(count = n(), .groups = "drop") %>% 
+  ggplot(aes(x = year,
+         y = count,
+         group = interaction(cntry,it2g14a),
+         color = it2g14a,
+         linetype = cntry,
+         shape = cntry))+
+  geom_line() +
+  geom_point(size = 2) +
+  facet_grid(~ it2g06a) +
+  labs(title = "Figure 1. ICT Use Across Countries (2018 & 2020)",
+       x = "Year of Response",
+       y = "Count",
+       color = "School ICT Priority",
+       linetype = "Country",
+       shape = "Country"
+  ) +
+  scale_color_OkabeIto() +
+  scale_shape_manual(values = c("DNK" = 0, "FIN" = 15, "URY" = 5))+
+  theme(panel.spacing = unit(1, "lines"))
+
+rq1_p3
+```
+
 
 
 
