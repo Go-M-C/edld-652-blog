@@ -24,11 +24,11 @@ knitr::opts_chunk$set(echo = FALSE,
 What is the relationship between teacher’s perspectives on the school’s attitude toward using ICT technology in the classroom?\
 (This question aims to explore institutional attitude toward information and communication technology (ICT) influence individual teacher behavior in adopting technology in the classroom).\
 
-**Variable selection: **
-it2g06a: ICT use at school when teaching
-IT2G14A: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis
-cntry: Country(Denmark, Finland, and Uruguay)
-partt: Survey participation
+**Variable selection: **\
+it2g06a: ICT use at school when teaching\
+it2g14a: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis\
+cntry: Country(Denmark, Finland, and Uruguay)\
+partt: Survey participation\
 idteach: Teacher ID\
 
 ```{r message = FALSE, warning = FALSE, include=FALSE}
@@ -196,6 +196,66 @@ rq1_p3 <- rq1_data %>%
 rq1_p3
 ```
 
+### Research Question 2
+What is the relationship between teachers’ technology use in the classroom and their major teaching subjects? \
+(This question aims to explore whether teachers in different subject areas (e.g., mathematics, sciences, language arts) use technology more frequently or differently than their peers in other subjects).\
 
+**Variable selection: **
+it2g06a: ICT use at school when teaching\
+Main Subjects in School Year:\
+it2g03a: Language arts test language\
+it2g03b: Language arts foreign and other national languages\
+it2g03c: Mathematics\
+it2g03d: Sciences\
+it2g03e: Human sciences/Humanities\
+it2g03f: Creative arts\
+it2g03g: Information technology\
+it2g03h: Practical and vocational subjects\
+it2g03i: Other\
+Type of variable: Binary\
+IT2G14A: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis\
+cntry: Country(Denmark, Finland, and Uruguay)\
+partt: Survey participation\
+idteach: Teacher ID\
+
+```{r}
+
+rq2_data <- mergedtp %>% 
+  clean_names() %>% 
+  select(idteach, cntry, partt, year, it2g06a,it2g03a, it2g03b, it2g03c, it2g03d, it2g03e, it2g03f, it2g03g, it2g03h, it2g03i) %>% 
+  filter(partt == 1)
+
+rq2_data <- na.omit(rq2_data)
+
+rq2_data <- rq2_data %>% 
+  mutate(it2g06a = factor(it2g06a,
+                          level = 1:5,
+                          labels = c("Never", "Less than once a month", "At least once a month but not every week", "At least once a week but not every day", "Every day"), ordered = TRUE),
+         across(starts_with("it2g03"), ~ factor(.x, levels = 1:2, labels = c("Checked", "Not checked"))))
+
+rq2_aggregated <- rq2_data %>% 
+  pivot_longer(cols = starts_with("it2g03"), names_to = "subject", values_to = "checked") %>% 
+  filter(checked == "Checked") %>% 
+  group_by(subject, it2g06a) %>% 
+  summarise(count = n(), .groups = 'drop') %>%
+  mutate(subject = factor(subject, 
+                          levels = c("it2g03a", "it2g03b", "it2g03c", "it2g03d", "it2g03e", "it2g03f", "it2g03g", "it2g03h", "it2g03i"),
+                          labels = c("Language arts test language", "Language arts foreign and other national languages", "Mathematics", "Sciences","Human sciences/Humanities", "Creative arts", "Information technology", "Practical and vocational subjects", "Other")))
+
+```
+
+```{r}
+p_subject <- rq2_aggregated %>% 
+  ggplot(aes(x = it2g06a, y = subject, fill = count)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "orange") +
+  labs(title = "Relationship Between Teachers’ Technology Use in School and Teaching Subjects",
+       x = "Technology Use",
+       y = "Teaching Subject",
+       fill = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p_subject
+```
 
 
