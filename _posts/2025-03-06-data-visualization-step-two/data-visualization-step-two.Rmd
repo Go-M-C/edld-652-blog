@@ -12,7 +12,6 @@ output:
     self_contained: false
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       eval = TRUE,
@@ -21,17 +20,15 @@ knitr::opts_chunk$set(echo = FALSE,
 ```
 
 ### Research Question 1
+
 What is the relationship between teacher’s perspectives on the school’s attitude toward using ICT technology in the classroom?\
 (This question aims to explore institutional attitude toward information and communication technology (ICT) influence individual teacher behavior in adopting technology in the classroom).\
 
-**Variable selection: **\
-it2g06a: ICT use at school when teaching\
-it2g14a: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis\
-cntry: Country(Denmark, Finland, and Uruguay)\
-partt: Survey participation\
-idteach: Teacher ID\
+**Variable selection:** \
+it2g06a: ICT use at school when teaching; it2g14a: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching; cntry: Country(Denmark, Finland, and Uruguay); partt: Survey participation; idteach: Teacher ID;\
 
-```{r message = FALSE, warning = FALSE, include=FALSE}
+
+```{r include=FALSE}
 library(here)
 library(rio)
 library(tidyverse)
@@ -50,13 +47,13 @@ library(lme4)
 
 ```
 
-```{r}
+```{r include=FALSE}
 # read in data
 load(here("data","MERGEDTP.Rdata"))
 mergedtp <- MERGEDTP
 ```
 
-```{r layout = "l-page"}
+```{r include=FALSE}
 rq1_data <- mergedtp %>% 
   clean_names() %>% 
   select(idteach, cntry, partt, year, it2g06a, it2g14a) %>% 
@@ -72,13 +69,15 @@ rq1_data$it2g06a <- factor(rq1_data$it2g06a,
                            levels = 1:5,
                            labels = c("Never", "Less than once a month", "At least once a month but not every week", "At least once a week but not every day", "Every day"))
 
-datasummary_skim(rq1_data, 
-                 type = "categorical")
-
 ```
 
-The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt function to the rest of the table. However, the summary is still too robust.\
+```{r layout = "l-page"}
+datasummary_skim(rq1_data, 
+                 type = "categorical")
+```
 
+
+The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = "gt" to apply the gt() function to the rest of the table. However, the summary table looks still robust.\
 
 ```{r layout = "l-page"}
 rq1_summary <- rq1_data %>% 
@@ -88,12 +87,13 @@ rq1_summary <- rq1_data %>%
   ) %>% 
   cols_width(everything() ~ px(130)) %>% 
   opt_table_outline()
+
 rq1_summary
 ```
 
-Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.\
+Then, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.\
 
-```{r layout = "l-page"}
+```{r include=FALSE}
 rq1_summary <- rq1_data %>% 
   group_by(cntry, year, it2g06a, it2g14a) %>% 
   summarise(
@@ -101,7 +101,9 @@ rq1_summary <- rq1_data %>%
   mutate(Percent = round(100 * N/sum(N), 1)) %>% 
   pivot_wider(names_from = year, values_from = c(N, Percent), names_glue = "{year}_{.value}") %>% 
   arrange(cntry, it2g06a, it2g14a)
+```
 
+```{r}
 rq1_summary %>% 
   gt() %>% 
   tab_header(title = "Teachers' ICT perspectives by country and year (2018 & 2020)") %>% 
@@ -130,10 +132,14 @@ rq1_summary %>%
   ) %>% 
   tab_footnote(
     footnote = "Note: DNK refers to Denmark, FIN refers to Finland, and URY refers to Uruguay.")
-
 ```
 
-Here is how I visualize the categorical data.\
+**Visualize with figures**
+
+The table summary can help me to get an idea of the structure of my dataset. However, it takes too much spaces. Therefore, I decided to visualize it with a plot. \
+
+My initial attempt was not that bad, but it looks too busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.\
+
 
 ```{r}
 rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
@@ -148,8 +154,6 @@ rq1_p1 <- ggplot(rq1_data, aes(x = it2g14a, fill = it2g06a)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 rq1_p1
 ```
-
-The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.\
 
 ```{r}
 rq1_p2 <- ggplot(rq1_data, aes(x = it2g06a, fill = it2g14a)) +
@@ -166,6 +170,7 @@ rq1_p2 <- ggplot(rq1_data, aes(x = it2g06a, fill = it2g14a)) +
 rq1_p2
 ```
 
+I am not satisfied with that because it is difficult to tell the difference. So I decided to factor year, and group the data by country, year, ICT use frequency, and school priority and got this.\
 
 ```{r}
 rq1_data$year <- as.factor(rq1_data$year)
@@ -197,11 +202,11 @@ rq1_p3
 ```
 
 ### Research Question 2
-What is the relationship between teachers’ technology use in the classroom and their major teaching subjects? \
+
+What is the relationship between teachers’ technology use in the classroom and their major teaching subjects?\
 (This question aims to explore whether teachers in different subject areas (e.g., mathematics, sciences, language arts) use technology more frequently or differently than their peers in other subjects).\
 
-**Variable selection: **
-it2g06a: ICT use at school when teaching\
+**Variable selection:** it2g06a: ICT use at school when teaching\
 Main Subjects in School Year:\
 it2g03a: Language arts test language\
 it2g03b: Language arts foreign and other national languages\
@@ -314,4 +319,3 @@ p_subject_p4 <- rq2_data %>%
 
 p_subject_p4
 ```
-

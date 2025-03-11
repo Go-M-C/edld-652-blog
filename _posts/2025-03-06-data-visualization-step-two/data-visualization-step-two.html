@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data-visualization-step-two_files/anchor-4.2.2/anchor.min.js","data-visualization-step-two_files/bowser-1.9.3/bowser.min.js","data-visualization-step-two_files/distill-2.2.21/template.v2.js","data-visualization-step-two_files/figure-html5/unnamed-chunk-10-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-11-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-12-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-13-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-6-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-7-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-8-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-9-1.png","data-visualization-step-two_files/header-attrs-2.29/header-attrs.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.min.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.min.map","data-visualization-step-two_files/popper-2.6.0/popper.min.js","data-visualization-step-two_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-visualization-step-two_files/tippy-6.2.7/tippy-light-border.css","data-visualization-step-two_files/tippy-6.2.7/tippy.css","data-visualization-step-two_files/tippy-6.2.7/tippy.umd.min.js","data-visualization-step-two_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data-visualization-step-two_files/anchor-4.2.2/anchor.min.js","data-visualization-step-two_files/bowser-1.9.3/bowser.min.js","data-visualization-step-two_files/distill-2.2.21/template.v2.js","data-visualization-step-two_files/figure-html5/unnamed-chunk-10-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-11-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-12-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-13-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-14-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-15-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-6-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-7-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-8-1.png","data-visualization-step-two_files/figure-html5/unnamed-chunk-9-1.png","data-visualization-step-two_files/header-attrs-2.29/header-attrs.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.min.js","data-visualization-step-two_files/jquery-3.6.0/jquery-3.6.0.min.map","data-visualization-step-two_files/popper-2.6.0/popper.min.js","data-visualization-step-two_files/tippy-6.2.7/tippy-bundle.umd.min.js","data-visualization-step-two_files/tippy-6.2.7/tippy-light-border.css","data-visualization-step-two_files/tippy-6.2.7/tippy.css","data-visualization-step-two_files/tippy-6.2.7/tippy.umd.min.js","data-visualization-step-two_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1549,47 +1549,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>What is the relationship between teacher’s perspectives on the school’s attitude toward using ICT technology in the classroom?<br />
 (This question aims to explore institutional attitude toward information and communication technology (ICT) influence individual teacher behavior in adopting technology in the classroom).<br />
 </p>
-<p><strong>Variable selection: </strong><br />
-it2g06a: ICT use at school when teaching<br />
-it2g14a: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching – X-axis<br />
-cntry: Country(Denmark, Finland, and Uruguay)<br />
-partt: Survey participation<br />
-idteach: Teacher ID<br />
+<p><strong>Variable selection:</strong><br />
+it2g06a: ICT use at school when teaching; it2g14a: Your School/Use of ICT in teaching at your school/ICT is considered a priority for use in teaching; cntry: Country(Denmark, Finland, and Uruguay); partt: Survey participation; idteach: Teacher ID;<br />
 </p>
-<div class="layout-chunk" data-layout="l-body">
-<details>
-<summary>
-Show code
-</summary>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># read in data</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='fu'><a href='https://here.r-lib.org//reference/here.html'>here</a></span><span class='op'>(</span><span class='st'>"data"</span>,<span class='st'>"MERGEDTP.Rdata"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span><span class='va'>mergedtp</span> <span class='op'>&lt;-</span> <span class='va'>MERGEDTP</span></span></code></pre>
-</div>
-</details>
-</div>
 <div class="layout-chunk" data-layout="l-page">
 <details>
 <summary>
 Show code
 </summary>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_data</span> <span class='op'>&lt;-</span> <span class='va'>mergedtp</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://sfirke.github.io/janitor/reference/clean_names.html'>clean_names</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>idteach</span>, <span class='va'>cntry</span>, <span class='va'>partt</span>, <span class='va'>year</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>partt</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>rq1_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g14a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g14a</span>,</span>
-<span>                           levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span>,<span class='fl'>3</span>,<span class='fl'>4</span><span class='op'>)</span>,</span>
-<span>                           labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Strongly Agree"</span>, <span class='st'>"Agree"</span>, <span class='st'>"Disagree"</span>, <span class='st'>"Strongly Disagree"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g06a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>rq1_data</span><span class='op'>$</span><span class='va'>it2g06a</span>,</span>
-<span>                           levels <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,</span>
-<span>                           labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Never"</span>, <span class='st'>"Less than once a month"</span>, <span class='st'>"At least once a month but not every week"</span>, <span class='st'>"At least once a week but not every day"</span>, <span class='st'>"Every day"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://modelsummary.com/man/datasummary_skim.html'>datasummary_skim</a></span><span class='op'>(</span><span class='va'>rq1_data</span>, </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://modelsummary.com/man/datasummary_skim.html'>datasummary_skim</a></span><span class='op'>(</span><span class='va'>rq1_data</span>, </span>
 <span>                 type <span class='op'>=</span> <span class='st'>"categorical"</span><span class='op'>)</span></span></code></pre>
 </div>
 </details>
@@ -1684,7 +1653,7 @@ Show code
 </tbody>
 </table>
 </div>
-<p>The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = “gt” to apply the gt function to the rest of the table. However, the summary is still too robust.<br />
+<p>The summary table looks good so far, but we can make it better by integrating table-making packages. At here, I added output = “gt” to apply the gt() function to the rest of the table. However, the summary table looks still robust.<br />
 </p>
 <div class="layout-chunk" data-layout="l-page">
 <details>
@@ -1699,26 +1668,27 @@ Show code
 <span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
 <span>  <span class='fu'><a href='https://gt.rstudio.com/reference/cols_width.html'>cols_width</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>~</span> <span class='fu'><a href='https://gt.rstudio.com/reference/px.html'>px</a></span><span class='op'>(</span><span class='fl'>130</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
 <span>  <span class='fu'><a href='https://gt.rstudio.com/reference/opt_table_outline.html'>opt_table_outline</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
 <span><span class='va'>rq1_summary</span></span></code></pre>
 </div>
 </details>
-<div id="zshgirxsyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zshgirxsyu table {
+<div id="ahokxdmtlu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ahokxdmtlu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zshgirxsyu thead, #zshgirxsyu tbody, #zshgirxsyu tfoot, #zshgirxsyu tr, #zshgirxsyu td, #zshgirxsyu th {
+#ahokxdmtlu thead, #ahokxdmtlu tbody, #ahokxdmtlu tfoot, #ahokxdmtlu tr, #ahokxdmtlu td, #ahokxdmtlu th {
   border-style: none;
 }
 
-#zshgirxsyu p {
+#ahokxdmtlu p {
   margin: 0;
   padding: 0;
 }
 
-#zshgirxsyu .gt_table {
+#ahokxdmtlu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1744,12 +1714,12 @@ Show code
   border-left-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_caption {
+#ahokxdmtlu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zshgirxsyu .gt_title {
+#ahokxdmtlu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1761,7 +1731,7 @@ Show code
   border-bottom-width: 0;
 }
 
-#zshgirxsyu .gt_subtitle {
+#ahokxdmtlu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1773,7 +1743,7 @@ Show code
   border-top-width: 0;
 }
 
-#zshgirxsyu .gt_heading {
+#ahokxdmtlu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1785,13 +1755,13 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_bottom_border {
+#ahokxdmtlu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_col_headings {
+#ahokxdmtlu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1806,7 +1776,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_col_heading {
+#ahokxdmtlu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1826,7 +1796,7 @@ Show code
   overflow-x: hidden;
 }
 
-#zshgirxsyu .gt_column_spanner_outer {
+#ahokxdmtlu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1838,15 +1808,15 @@ Show code
   padding-right: 4px;
 }
 
-#zshgirxsyu .gt_column_spanner_outer:first-child {
+#ahokxdmtlu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zshgirxsyu .gt_column_spanner_outer:last-child {
+#ahokxdmtlu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zshgirxsyu .gt_column_spanner {
+#ahokxdmtlu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1858,11 +1828,11 @@ Show code
   width: 100%;
 }
 
-#zshgirxsyu .gt_spanner_row {
+#ahokxdmtlu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zshgirxsyu .gt_group_heading {
+#ahokxdmtlu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1888,7 +1858,7 @@ Show code
   text-align: left;
 }
 
-#zshgirxsyu .gt_empty_group_heading {
+#ahokxdmtlu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1903,15 +1873,15 @@ Show code
   vertical-align: middle;
 }
 
-#zshgirxsyu .gt_from_md > :first-child {
+#ahokxdmtlu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zshgirxsyu .gt_from_md > :last-child {
+#ahokxdmtlu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zshgirxsyu .gt_row {
+#ahokxdmtlu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1930,7 +1900,7 @@ Show code
   overflow-x: hidden;
 }
 
-#zshgirxsyu .gt_stub {
+#ahokxdmtlu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1943,7 +1913,7 @@ Show code
   padding-right: 5px;
 }
 
-#zshgirxsyu .gt_stub_row_group {
+#ahokxdmtlu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1957,15 +1927,15 @@ Show code
   vertical-align: top;
 }
 
-#zshgirxsyu .gt_row_group_first td {
+#ahokxdmtlu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zshgirxsyu .gt_row_group_first th {
+#ahokxdmtlu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zshgirxsyu .gt_summary_row {
+#ahokxdmtlu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1975,16 +1945,16 @@ Show code
   padding-right: 5px;
 }
 
-#zshgirxsyu .gt_first_summary_row {
+#ahokxdmtlu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_first_summary_row.thick {
+#ahokxdmtlu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zshgirxsyu .gt_last_summary_row {
+#ahokxdmtlu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1994,7 +1964,7 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_grand_summary_row {
+#ahokxdmtlu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2004,7 +1974,7 @@ Show code
   padding-right: 5px;
 }
 
-#zshgirxsyu .gt_first_grand_summary_row {
+#ahokxdmtlu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2014,7 +1984,7 @@ Show code
   border-top-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_last_grand_summary_row_top {
+#ahokxdmtlu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2024,11 +1994,11 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_striped {
+#ahokxdmtlu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zshgirxsyu .gt_table_body {
+#ahokxdmtlu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2037,7 +2007,7 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_footnotes {
+#ahokxdmtlu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2051,7 +2021,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_footnote {
+#ahokxdmtlu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2060,7 +2030,7 @@ Show code
   padding-right: 5px;
 }
 
-#zshgirxsyu .gt_sourcenotes {
+#ahokxdmtlu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2074,7 +2044,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#zshgirxsyu .gt_sourcenote {
+#ahokxdmtlu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2082,72 +2052,72 @@ Show code
   padding-right: 5px;
 }
 
-#zshgirxsyu .gt_left {
+#ahokxdmtlu .gt_left {
   text-align: left;
 }
 
-#zshgirxsyu .gt_center {
+#ahokxdmtlu .gt_center {
   text-align: center;
 }
 
-#zshgirxsyu .gt_right {
+#ahokxdmtlu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zshgirxsyu .gt_font_normal {
+#ahokxdmtlu .gt_font_normal {
   font-weight: normal;
 }
 
-#zshgirxsyu .gt_font_bold {
+#ahokxdmtlu .gt_font_bold {
   font-weight: bold;
 }
 
-#zshgirxsyu .gt_font_italic {
+#ahokxdmtlu .gt_font_italic {
   font-style: italic;
 }
 
-#zshgirxsyu .gt_super {
+#ahokxdmtlu .gt_super {
   font-size: 65%;
 }
 
-#zshgirxsyu .gt_footnote_marks {
+#ahokxdmtlu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zshgirxsyu .gt_asterisk {
+#ahokxdmtlu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zshgirxsyu .gt_indent_1 {
+#ahokxdmtlu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zshgirxsyu .gt_indent_2 {
+#ahokxdmtlu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zshgirxsyu .gt_indent_3 {
+#ahokxdmtlu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zshgirxsyu .gt_indent_4 {
+#ahokxdmtlu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zshgirxsyu .gt_indent_5 {
+#ahokxdmtlu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zshgirxsyu .katex-display {
+#ahokxdmtlu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zshgirxsyu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ahokxdmtlu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2225,23 +2195,15 @@ Show code
 </table>
 </div>
 </div>
-<p>Therefore, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.<br />
+<p>Then, I decided to subgroup the dataset by country and year to show the counts and percentage for each category.<br />
 </p>
-<div class="layout-chunk" data-layout="l-page">
+<div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
 Show code
 </summary>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_summary</span> <span class='op'>&lt;-</span> <span class='va'>rq1_data</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>cntry</span>, <span class='va'>year</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span></span>
-<span>    N <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Percent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fl'>100</span> <span class='op'>*</span> <span class='va'>N</span><span class='op'>/</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>N</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>year</span>, values_from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>N</span>, <span class='va'>Percent</span><span class='op'>)</span>, names_glue <span class='op'>=</span> <span class='st'>"{year}_{.value}"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>cntry</span>, <span class='va'>it2g06a</span>, <span class='va'>it2g14a</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>rq1_summary</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rq1_summary</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
 <span>  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
 <span>  <span class='fu'><a href='https://gt.rstudio.com/reference/tab_header.html'>tab_header</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Teachers' ICT perspectives by country and year (2018 &amp; 2020)"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> </span>
 <span>  <span class='fu'><a href='https://gt.rstudio.com/reference/cols_label.html'>cols_label</a></span><span class='op'>(</span></span>
@@ -2271,23 +2233,23 @@ Show code
 <span>    footnote <span class='op'>=</span> <span class='st'>"Note: DNK refers to Denmark, FIN refers to Finland, and URY refers to Uruguay."</span><span class='op'>)</span></span></code></pre>
 </div>
 </details>
-<div id="nlucajbyqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nlucajbyqx table {
+<div id="lljtwnccwd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lljtwnccwd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nlucajbyqx thead, #nlucajbyqx tbody, #nlucajbyqx tfoot, #nlucajbyqx tr, #nlucajbyqx td, #nlucajbyqx th {
+#lljtwnccwd thead, #lljtwnccwd tbody, #lljtwnccwd tfoot, #lljtwnccwd tr, #lljtwnccwd td, #lljtwnccwd th {
   border-style: none;
 }
 
-#nlucajbyqx p {
+#lljtwnccwd p {
   margin: 0;
   padding: 0;
 }
 
-#nlucajbyqx .gt_table {
+#lljtwnccwd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2313,12 +2275,12 @@ Show code
   border-left-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_caption {
+#lljtwnccwd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nlucajbyqx .gt_title {
+#lljtwnccwd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2330,7 +2292,7 @@ Show code
   border-bottom-width: 0;
 }
 
-#nlucajbyqx .gt_subtitle {
+#lljtwnccwd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2342,7 +2304,7 @@ Show code
   border-top-width: 0;
 }
 
-#nlucajbyqx .gt_heading {
+#lljtwnccwd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2354,13 +2316,13 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_bottom_border {
+#lljtwnccwd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_col_headings {
+#lljtwnccwd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2375,7 +2337,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_col_heading {
+#lljtwnccwd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2395,7 +2357,7 @@ Show code
   overflow-x: hidden;
 }
 
-#nlucajbyqx .gt_column_spanner_outer {
+#lljtwnccwd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2407,15 +2369,15 @@ Show code
   padding-right: 4px;
 }
 
-#nlucajbyqx .gt_column_spanner_outer:first-child {
+#lljtwnccwd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nlucajbyqx .gt_column_spanner_outer:last-child {
+#lljtwnccwd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nlucajbyqx .gt_column_spanner {
+#lljtwnccwd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2427,11 +2389,11 @@ Show code
   width: 100%;
 }
 
-#nlucajbyqx .gt_spanner_row {
+#lljtwnccwd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nlucajbyqx .gt_group_heading {
+#lljtwnccwd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2457,7 +2419,7 @@ Show code
   text-align: left;
 }
 
-#nlucajbyqx .gt_empty_group_heading {
+#lljtwnccwd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2472,15 +2434,15 @@ Show code
   vertical-align: middle;
 }
 
-#nlucajbyqx .gt_from_md > :first-child {
+#lljtwnccwd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nlucajbyqx .gt_from_md > :last-child {
+#lljtwnccwd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nlucajbyqx .gt_row {
+#lljtwnccwd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2499,7 +2461,7 @@ Show code
   overflow-x: hidden;
 }
 
-#nlucajbyqx .gt_stub {
+#lljtwnccwd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2512,7 +2474,7 @@ Show code
   padding-right: 5px;
 }
 
-#nlucajbyqx .gt_stub_row_group {
+#lljtwnccwd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2526,15 +2488,15 @@ Show code
   vertical-align: top;
 }
 
-#nlucajbyqx .gt_row_group_first td {
+#lljtwnccwd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nlucajbyqx .gt_row_group_first th {
+#lljtwnccwd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nlucajbyqx .gt_summary_row {
+#lljtwnccwd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2544,16 +2506,16 @@ Show code
   padding-right: 5px;
 }
 
-#nlucajbyqx .gt_first_summary_row {
+#lljtwnccwd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_first_summary_row.thick {
+#lljtwnccwd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nlucajbyqx .gt_last_summary_row {
+#lljtwnccwd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2563,7 +2525,7 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_grand_summary_row {
+#lljtwnccwd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2573,7 +2535,7 @@ Show code
   padding-right: 5px;
 }
 
-#nlucajbyqx .gt_first_grand_summary_row {
+#lljtwnccwd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2583,7 +2545,7 @@ Show code
   border-top-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_last_grand_summary_row_top {
+#lljtwnccwd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2593,11 +2555,11 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_striped {
+#lljtwnccwd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nlucajbyqx .gt_table_body {
+#lljtwnccwd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2606,7 +2568,7 @@ Show code
   border-bottom-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_footnotes {
+#lljtwnccwd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2620,7 +2582,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_footnote {
+#lljtwnccwd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2629,7 +2591,7 @@ Show code
   padding-right: 5px;
 }
 
-#nlucajbyqx .gt_sourcenotes {
+#lljtwnccwd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2643,7 +2605,7 @@ Show code
   border-right-color: #D3D3D3;
 }
 
-#nlucajbyqx .gt_sourcenote {
+#lljtwnccwd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2651,72 +2613,72 @@ Show code
   padding-right: 5px;
 }
 
-#nlucajbyqx .gt_left {
+#lljtwnccwd .gt_left {
   text-align: left;
 }
 
-#nlucajbyqx .gt_center {
+#lljtwnccwd .gt_center {
   text-align: center;
 }
 
-#nlucajbyqx .gt_right {
+#lljtwnccwd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nlucajbyqx .gt_font_normal {
+#lljtwnccwd .gt_font_normal {
   font-weight: normal;
 }
 
-#nlucajbyqx .gt_font_bold {
+#lljtwnccwd .gt_font_bold {
   font-weight: bold;
 }
 
-#nlucajbyqx .gt_font_italic {
+#lljtwnccwd .gt_font_italic {
   font-style: italic;
 }
 
-#nlucajbyqx .gt_super {
+#lljtwnccwd .gt_super {
   font-size: 65%;
 }
 
-#nlucajbyqx .gt_footnote_marks {
+#lljtwnccwd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nlucajbyqx .gt_asterisk {
+#lljtwnccwd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nlucajbyqx .gt_indent_1 {
+#lljtwnccwd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nlucajbyqx .gt_indent_2 {
+#lljtwnccwd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nlucajbyqx .gt_indent_3 {
+#lljtwnccwd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nlucajbyqx .gt_indent_4 {
+#lljtwnccwd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nlucajbyqx .gt_indent_5 {
+#lljtwnccwd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nlucajbyqx .katex-display {
+#lljtwnccwd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nlucajbyqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lljtwnccwd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3085,7 +3047,10 @@ Show code
 </table>
 </div>
 </div>
-<p>Here is how I visualize the categorical data.<br />
+<p><strong>Visualize with figures</strong></p>
+<p>The table summary can help me to get an idea of the structure of my dataset. However, it takes too much spaces. Therefore, I decided to visualize it with a plot.<br />
+</p>
+<p>My initial attempt was not that bad, but it looks too busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.<br />
 </p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -3106,10 +3071,8 @@ Show code
 <span><span class='va'>rq1_p1</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
-<p>The plot one looks good so far, but it is a bit busy, and the color looks too bright. So I changed the position to dodge in geom_bar, and applied scale_fill_OkabeIto() to make it color-blind friendly.<br />
-</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -3130,8 +3093,10 @@ Show code
 <span><span class='va'>rq1_p2</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
+<p>I am not satisfied with that because it is difficult to tell the difference. So I decided to factor year, and group the data by country, year, ICT use frequency, and school priority and got this.<br />
+</p>
 <div class="layout-chunk" data-layout="l-body">
 <details>
 <summary>
@@ -3166,14 +3131,13 @@ Show code
 <span><span class='va'>rq1_p3</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
 <h3 id="research-question-2">Research Question 2</h3>
 <p>What is the relationship between teachers’ technology use in the classroom and their major teaching subjects?<br />
 (This question aims to explore whether teachers in different subject areas (e.g., mathematics, sciences, language arts) use technology more frequently or differently than their peers in other subjects).<br />
 </p>
-<p><strong>Variable selection: </strong>
-it2g06a: ICT use at school when teaching<br />
+<p><strong>Variable selection:</strong> it2g06a: ICT use at school when teaching<br />
 Main Subjects in School Year:<br />
 it2g03a: Language arts test language<br />
 it2g03b: Language arts foreign and other national languages<br />
@@ -3239,7 +3203,7 @@ Show code
 <span><span class='va'>p_subject</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -3268,7 +3232,7 @@ Show code
 <span><span class='va'>p_subject_p2</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -3288,7 +3252,7 @@ Show code
 <span><span class='va'>p_subject_p3</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <details>
@@ -3317,7 +3281,7 @@ Show code
 <span><span class='va'>p_subject_p4</span></span></code></pre>
 </div>
 </details>
-<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
+<p><img src="data-visualization-step-two_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
