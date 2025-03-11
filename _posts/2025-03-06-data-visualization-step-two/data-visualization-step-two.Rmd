@@ -71,6 +71,8 @@ rq1_data$it2g06a <- factor(rq1_data$it2g06a,
 
 ```
 
+**Visualize with tables**
+
 ```{r layout = "l-page"}
 datasummary_skim(rq1_data, 
                  type = "categorical")
