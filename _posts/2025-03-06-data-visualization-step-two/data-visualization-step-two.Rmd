@@ -258,4 +258,38 @@ p_subject <- rq2_aggregated %>%
 p_subject
 ```
 
+```{r}
+p_subject_2 <- rq2_data %>% 
+  pivot_longer(cols = starts_with("it2g03"), names_to = "subject", values_to = "checked") %>% 
+  filter(checked == "Checked") %>% 
+  mutate(subject = factor(subject, 
+                          levels = c("it2g03a", "it2g03b", "it2g03c", "it2g03d", "it2g03e", "it2g03f", "it2g03g", "it2g03h", "it2g03i"),
+                          labels = c("Language arts test language", "Language arts foreign and other national languages", "Mathematics", "Sciences","Human sciences/Humanities", "Creative arts", "Information technology", "Practical and vocational subjects", "Other"))) 
+
+p_subject_p2 <- p_subject_2 %>% 
+  ggplot(aes(x = subject, fill = it2g06a)) +
+  geom_bar(position = "dodge") +
+  facet_wrap(~year)+
+  labs(title = "Frequncy of ICT Use by Subject",
+       x = "Subject",
+       y = "Proportion of Teachers",
+       fill = "ICT Use Frequency") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_fill_OkabeIto()
+
+p_subject_p2
+```
+
+```{r}
+p_subject_p3 <- p_subject_2 %>% 
+  ggplot(aes(x = subject, y = as.numeric(it2g06a), fill = subject)) +
+  geom_violin() +
+  labs(title = "Density of Techology Use Frequency by Subject",
+       x = "Subject",
+       y = "ICT Use Frequency") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_fill_OkabeIto()
+
+p_subject_p3
+```
 
